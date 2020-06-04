@@ -1,0 +1,1 @@
+Code for producing Figure 7 in the paper 'Graph Drawing by Stochastic Gradient Descent'. The code produces the errorbar plots, and Inkscape was used to add the various .png layouts included in the repo.
