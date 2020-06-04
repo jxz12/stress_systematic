@@ -67,9 +67,9 @@ import glob
 # also gets the minimum of all minimums
 def get_range(extension, iteration):
     result = {}
-    for file in glob.glob(extension):
+    for file in glob.glob("data/"+extension):
         stress = unpack(file)
-        name = file[:-len(extension)+1]
+        name = file[5:-len(extension)+1]
         
         if save is False:
             avgg, minn, maxx = get_stress(stress)
