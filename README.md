@@ -1,4 +1,5 @@
 # Experimental Comparison of Network Layout Algorithms: Majorization vs Stochastic Gradient Descent
+![Figure7](systematic.png)
 Code for producing Figure 7 in the paper 'Graph Drawing by Stochastic Gradient Descent'. The code produces the errorbar plots, and Inkscape was used to add the various .png layouts included in the repo. Code used to produce the data can be found in the separate repo <https://github.com/jxz12/s_gd2>.
 
 ## Abstract
