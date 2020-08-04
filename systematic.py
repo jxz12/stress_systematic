@@ -4,7 +4,6 @@ Created on Wed Mar 14 15:10:25 2018
 
 @author: jxz12
 """
-
 import numpy as np
 
 # parse the data
@@ -17,9 +16,9 @@ def unpack(name):
                 stress.append((int(vals[0]),float(vals[1]),float(vals[2])/1000))
     return stress
 
-# save determines whether to overwrite minmins for ordering (this file was run in spyder)
-save=True
-#save=False
+# save determines whether to overwrite minmins for ordering (as well as convergence vs 15 iterations)
+# save=True
+save=False
 
 # tracks the min, max, avg at every iteration
 def get_stress(stress):
@@ -88,10 +87,12 @@ def get_range(extension, iteration):
 
 
 # get values at the 15th iteration
-range1 = get_range("*_maj.txt", 14)
-range2 = get_range("*_wcr.txt", 14)
-#range1 = get_range("*_maj_converged.txt", -1)
-#range2 = get_range("*_wcr_converged30.txt", -1)
+if save:
+    range1 = get_range("*_maj_converged.txt", -1)
+    range2 = get_range("*_wcr_converged30.txt", -1)
+else:
+    range1 = get_range("*_maj.txt", 14)
+    range2 = get_range("*_wcr.txt", 14)
 
 
 #print(min(range1.values(), key=lambda x: x['iters']))
@@ -156,7 +157,8 @@ if save is True:
 
 # plot error bars
 import matplotlib.pyplot as plt
-plt.rcParams["figure.figsize"] = (20,3)
+plt.clf()
+plt.figure(figsize=(20,3))
 plt.margins(.008, .05)
 plt.semilogy()
 
@@ -211,10 +213,6 @@ plt.ylabel('stress')
 #plt.ylim(ymin=.97, ymax=2)
 plt.ylim(ymin=.95, ymax=10)
 
-plt.title(r'15 iterations', fontweight='bold')
-#plt.title(r'$\rightarrow \infty$', fontweight='bold')
-#plt.title('convergence', fontweight='bold')
-#plt.title(r'$\omega$', fontweight='bold')
 
 plt.tick_params(
     axis='x',          # changes apply to the x-axis
@@ -223,5 +221,10 @@ plt.tick_params(
     top=False,         # ticks along the top edge are off
     labelbottom='off')
 
-plt.savefig('systematic.svg')
+if save:
+    plt.title(r'$\rightarrow \infty$', fontweight='bold')
+    plt.savefig('systematic_inf.svg')
+else:
+    plt.title(r'15 iterations', fontweight='bold')
+    plt.savefig('systematic_15.svg')
 
